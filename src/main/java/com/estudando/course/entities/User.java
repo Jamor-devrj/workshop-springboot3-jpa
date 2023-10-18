@@ -2,9 +2,19 @@ package com.estudando.course.entities;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity 
+@Table(name = "tb_user") 					//o nome da tabela do banco de dados para tb_user.
+public class User implements Serializable{  //palavra User é exclusiva do H2
 	private static final long serialVersionUID = 1L;
 	
+	@Id  //chave primaria
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //para se auto incrementavel no banco de dados
 	private Long id;
 	private String name;
 	private String email;
