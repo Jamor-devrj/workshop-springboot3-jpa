@@ -1,11 +1,14 @@
 package com.estudando.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity 
@@ -20,6 +23,9 @@ public class User implements Serializable{  //palavra User é exclusiva do H2
 	private String email;
 	private String phone;
 	private String password;
+	
+	@OneToMany(mappedBy = "client") //um pra muitos
+	private List<Order> orders = new ArrayList<>(); //associação com a classe Order
 	
 	public User() {		
 	}
@@ -72,6 +78,9 @@ public class User implements Serializable{  //palavra User é exclusiva do H2
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public List<Order> getOrders() {
+		return orders;
+	}
 
 	@Override
 	public int hashCode() {
@@ -97,6 +106,8 @@ public class User implements Serializable{  //palavra User é exclusiva do H2
 			return false;
 		return true;
 	}
+
+
 	
 	
 
