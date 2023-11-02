@@ -3,6 +3,7 @@ package com.estudando.course.entities;
 import java.io.Serializable;
 
 import com.estudando.course.entities.pk.OrdemItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -14,7 +15,7 @@ public class OrderItem implements Serializable{  //palavra User é exclusiva do 
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private OrdemItemPK id;
+	private OrdemItemPK id = new OrdemItemPK(); //sempre instanciar quando utilizar classe auxiliar como ID composto 
 	
 	private Integer quantity;
 	private Double price;
@@ -30,6 +31,7 @@ public class OrderItem implements Serializable{  //palavra User é exclusiva do 
 		this.price = price;
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
