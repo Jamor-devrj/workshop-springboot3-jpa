@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.estudando.course.entities.Category;
 import com.estudando.course.entities.Order;
 import com.estudando.course.entities.OrderItem;
+import com.estudando.course.entities.Payment;
 import com.estudando.course.entities.Product;
 import com.estudando.course.entities.User;
 import com.estudando.course.entities.enums.OrderStatus;
@@ -82,6 +83,12 @@ public class TestConfig implements CommandLineRunner{
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
+		//numa relação um para um nao chama o repository
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T22:53:07Z"), o1);
+		o1.setPayment(pay1);	//associação de mao dupla em memoria: associando o pedido o1 com pagamento pay1.  
+		
+		orderRepository.save(o1); //salvando novamente o pedido e o JPA vai tratar de salvar o pagamento desse pedido
+				
 	}	
 	
 	/*essa classe vai servir para configurar os database seeding
