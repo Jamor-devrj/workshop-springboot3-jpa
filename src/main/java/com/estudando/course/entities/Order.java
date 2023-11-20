@@ -33,8 +33,7 @@ public class Order implements Serializable {
 
 	@ManyToOne // muito para um
 	@JoinColumn(name = "client_id")
-	private User client;
-	
+	private User client;	
 	
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
@@ -83,6 +82,10 @@ public class Order implements Serializable {
 	public void setClient(User client) {
 		this.client = client;
 	}
+	
+	public Set<OrderItem> getItems(){
+		return items;
+	}
 
 	@Override
 	public int hashCode() {
@@ -90,10 +93,6 @@ public class Order implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
-	}
-	
-	public Set<OrderItem> getItems(){
-		return items;
 	}
 
 	@Override
@@ -112,5 +111,4 @@ public class Order implements Serializable {
 			return false;
 		return true;
 	}
-
 }
